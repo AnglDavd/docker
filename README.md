@@ -1,6 +1,6 @@
 # 🐳 Docker Compose Configurations: Your Gateway to Easy Deployments! 🚀
 
-Welcome to this repository, a curated collection of Docker Compose configurations designed to simplify the deployment and management of various self-hosted services. Whether you're looking to automate workflows, manage your retro game collection, or streamline your media library, you'll find a ready-to-use setup here! ✨
+Welcome to this repository, a growing collection of Docker container configuration files designed to simplify the deployment and management of various self-hosted services. Whether you're looking to automate workflows, manage your retro game collection, or streamline your media library, you'll find a ready-to-use setup here! ✨
 
 ## 🌟 Explore Our Services
 
