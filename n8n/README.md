@@ -13,20 +13,14 @@ Welcome to the n8n Docker Compose setup! This configuration allows you to quickl
 
 You can get this specific n8n Docker Compose configuration without cloning the entire repository. Choose the method that suits you best:
 
-### Method 1: Using `curl` and `unzip` (Recommended)
+### Method 1: Using `git archive` (Recommended)
 
-This method allows you to download this specific configuration directly from GitHub without cloning the entire repository.
+If you have Git installed, you can download a clean `.zip` archive of just this `n8n` configuration:
 
 ```bash
-# 1. Download the entire repository as a .zip file
-curl -LO https://github.com/AnglDavd/docker/archive/refs/heads/main.zip
-
-# 2. Extract only the 'n8n' subdirectory from the downloaded .zip
-unzip main.zip "docker-main/n8n/*" -d .
-
-# 3. Move the content to your current directory and clean up
-mv docker-main/n8n/* .
-rm -rf docker-main main.zip
+git archive --format=zip --output=n8n-config.zip main:n8n
+unzip n8n-config.zip
+cd n8n
 ```
 
 ### Method 2: Manual Download

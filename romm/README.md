@@ -10,20 +10,14 @@ RomM is a web-based application for managing your retro game collection. This se
 
 You can get this specific RomM Docker Compose configuration without cloning the entire repository. Choose the method that suits you best:
 
-### Method 1: Using `curl` and `unzip` (Recommended)
+### Method 1: Using `git archive` (Recommended)
 
-This method allows you to download this specific configuration directly from GitHub without cloning the entire repository.
+If you have Git installed, you can download a clean `.zip` archive of just this `romm` configuration:
 
 ```bash
-# 1. Download the entire repository as a .zip file
-curl -LO https://github.com/AnglDavd/docker/archive/refs/heads/main.zip
-
-# 2. Extract only the 'romm' subdirectory from the downloaded .zip
-unzip main.zip "docker-main/romm/*" -d .
-
-# 3. Move the content to your current directory and clean up
-mv docker-main/romm/* .
-rm -rf docker-main main.zip
+git archive --format=zip --output=romm-config.zip main:romm
+unzip romm-config.zip
+cd romm
 ```
 
 ### Method 2: Manual Download
