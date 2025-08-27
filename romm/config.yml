@@ -1,14 +1,31 @@
+# ROMM (Rom Manager) Application Configuration File
+#
+# This file defines core settings for the ROMM application, including
+# filesystem paths for ROMs and configuration of metadata sources.
+
 system:
   filesystem:
+    # roms_folder: Specifies the subfolder within the mounted ROMM library volume
+    # where your game ROMs are located. This path is relative to the /romm/library
+    # mount point inside the Docker container.
     roms_folder: roms
+
 metadata:
   sources:
+    # Defines the order and enablement of various metadata providers.
+    # ROMM will attempt to fetch metadata from these sources in the specified priority.
+
+    # ScreenScraper.net: A comprehensive database for game metadata and media.
     - name: screenscraper
-      enabled: true
-      priority: 1
+      enabled: true # Set to 'false' to disable this metadata source.
+      priority: 1   # Lower numbers indicate higher priority.
+
+    # SteamGridDB.com: Primarily for game artwork, including covers, heroes, and logos.
     - name: steamgriddb
-      enabled: true
-      priority: 2
+      enabled: true # Set to 'false' to disable this metadata source.
+      priority: 2   # Second in priority.
+
+    # IGDB (Internet Game Database): Another rich source for game information.
     - name: igdb
-      enabled: true
-      priority: 3
+      enabled: true # Set to 'false' to disable this metadata source.
+      priority: 3   # Third in priority.

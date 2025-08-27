@@ -1,81 +1,98 @@
+# Docker Compose configuration for the ARR Stack services.
+# This file orchestrates multiple media management applications to work together.
+# Environment variables are loaded from the .env file for flexible configuration.
+
 services:
+  # Sonarr: TV show management and automation.
   sonarr:
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
-    image: linuxserver/sonarr:latest
+      - PUID=${PUID} # User ID for permissions (from .env)
+      - PGID=${PGID} # Group ID for permissions (from .env)
+      - TZ=${TZ}     # Timezone for correct scheduling (from .env)
+    image: linuxserver/sonarr:latest # Official LinuxServer.io Sonarr image
     ports:
-      - 8989:8989/tcp
-    restart: always
+      - 8989:8989/tcp # Host_Port:Container_Port for Sonarr web UI
+    restart: always # Ensure the service restarts automatically
     volumes:
-      - ${ARRSTACK_DOWNLOADS_BASE}/Downloads:/downloads
-      - ${ARRSTACK_DOWNLOADS_BASE}/TV-Shows:/tvshows
-      - ${ARRSTACK_CONFIG_BASE}/sonarr:/config
+      - ${ARRSTACK_DOWNLOADS_BASE}/Downloads:/downloads # Mount downloads directory
+      - ${ARRSTACK_DOWNLOADS_BASE}/TV-Shows:/tvshows   # Mount TV shows library
+      - ${ARRSTACK_CONFIG_BASE}/sonarr:/config         # Mount Sonarr configuration directory
+
+  # Radarr: Movie management and automation.
   radarr:
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
-    image: linuxserver/radarr:latest
+      - PUID=${PUID} # User ID for permissions (from .env)
+      - PGID=${PGID} # Group ID for permissions (from .env)
+      - TZ=${TZ}     # Timezone for correct scheduling (from .env)
+    image: linuxserver/radarr:latest # Official LinuxServer.io Radarr image
     ports:
-      - 7878:7878/tcp
-    restart: always
+      - 7878:7878/tcp # Host_Port:Container_Port for Radarr web UI
+    restart: always # Ensure the service restarts automatically
     volumes:
-      - ${ARRSTACK_CONFIG_BASE}/radarr:/config
-      - ${ARRSTACK_DOWNLOADS_BASE}/Downloads:/downloads
-      - ${ARRSTACK_DOWNLOADS_BASE}/Movies:/movies
+      - ${ARRSTACK_CONFIG_BASE}/radarr:/config         # Mount Radarr configuration directory
+      - ${ARRSTACK_DOWNLOADS_BASE}/Downloads:/downloads # Mount downloads directory
+      - ${ARRSTACK_DOWNLOADS_BASE}/Movies:/movies       # Mount movies library
+
+  # Lidarr: Music management and automation.
   lidarr:
-    image: linuxserver/lidarr:latest
+    image: linuxserver/lidarr:latest # Official LinuxServer.io Lidarr image
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
+      - PUID=${PUID} # User ID for permissions (from .env)
+      - PGID=${PGID} # Group ID for permissions (from .env)
+      - TZ=${TZ}     # Timezone for correct scheduling (from .env)
     volumes:
-      - ${ARRSTACK_CONFIG_BASE}/lidarr:/config
-      - ${ARRSTACK_DOWNLOADS_BASE}/Music:/music
-      - ${ARRSTACK_DOWNLOADS_BASE}/Downloads:/downloads
+      - ${ARRSTACK_CONFIG_BASE}/lidarr:/config # Mount Lidarr configuration directory
+      - ${ARRSTACK_DOWNLOADS_BASE}/Music:/music # Mount music library
+      - ${ARRSTACK_DOWNLOADS_BASE}/Downloads:/downloads # Mount downloads directory
     ports:
-      - 8686:8686
-    restart: always
+      - 8686:8686 # Host_Port:Container_Port for Lidarr web UI
+    restart: always # Ensure the service restarts automatically
+
+  # Deluge: Lightweight BitTorrent client.
   deluge:
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
-    image: linuxserver/deluge:latest
+      - PUID=${PUID} # User ID for permissions (from .env)
+      - PGID=${PGID} # Group ID for permissions (from .env)
+      - TZ=${TZ}     # Timezone for correct scheduling (from .env)
+    image: linuxserver/deluge:latest # Official LinuxServer.io Deluge image
     ports:
-      - 6881:6881/tcp
-      - 6881:6881/udp
-      - 8112:8112/tcp
-    restart: always
+      - 6881:6881/tcp # Deluge daemon port (TCP)
+      - 6881:6881/udp # Deluge daemon port (UDP)
+      - 8112:8112/tcp # Deluge web UI port
+    restart: always # Ensure the service restarts automatically
     volumes:
-      - ${ARRSTACK_DOWNLOADS_BASE}/Downloads:/downloads
-      - ${ARRSTACK_CONFIG_BASE}/deluge:/config
+      - ${ARRSTACK_DOWNLOADS_BASE}/Downloads:/downloads # Mount downloads directory
+      - ${ARRSTACK_CONFIG_BASE}/deluge:/config         # Mount Deluge configuration directory
+
+  # Prowlarr: Indexer manager for Sonarr, Radarr, Lidarr, etc.
   prowlarr:
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
-    image: lscr.io/linuxserver/prowlarr:latest
+      - PUID=${PUID} # User ID for permissions (from .env)
+      - PGID=${PGID} # Group ID for permissions (from .env)
+      - TZ=${TZ}     # Timezone for correct scheduling (from .env)
+    image: lscr.io/linuxserver/prowlarr:latest # Official LinuxServer.io Prowlarr image
     ports:
-      - 9696:9696/tcp
-    restart: always
+      - 9696:9696/tcp # Host_Port:Container_Port for Prowlarr web UI
+    restart: always # Ensure the service restarts automatically
     volumes:
-      - ${ARRSTACK_DOWNLOADS_BASE}/:/media
-      - ${ARRSTACK_CONFIG_BASE}/prowlarr:/config
+      - ${ARRSTACK_DOWNLOADS_BASE}/:/media # Mount base media directory for indexer access
+      - ${ARRSTACK_CONFIG_BASE}/prowlarr:/config # Mount Prowlarr configuration directory
+
+  # Bazarr: Subtitle management for movies and TV shows.
   bazarr:
-    image: lscr.io/linuxserver/bazarr:latest
-    container_name: bazarr
+    image: lscr.io/linuxserver/bazarr:latest # Official LinuxServer.io Bazarr image
+    container_name: bazarr # Explicit container name
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
+      - PUID=${PUID} # User ID for permissions (from .env)
+      - PGID=${PGID} # Group ID for permissions (from .env)
+      - TZ=${TZ}     # Timezone for correct scheduling (from .env)
     volumes:
-      - ${ARRSTACK_CONFIG_BASE}/bazarr:/config
-      - ${ARRSTACK_DOWNLOADS_BASE}/Movies:/movies
-      - ${ARRSTACK_DOWNLOADS_BASE}/TV-Shows:/tvshows
+      - ${ARRSTACK_CONFIG_BASE}/bazarr:/config # Mount Bazarr configuration directory
+      - ${ARRSTACK_DOWNLOADS_BASE}/Movies:/movies # Mount movies library for subtitle scanning
+      - ${ARRSTACK_DOWNLOADS_BASE}/TV-Shows:/tvshows # Mount TV shows library for subtitle scanning
     ports:
-      - 6767:6767
-    restart: unless-stopped
+      - 6767:6767 # Host_Port:Container_Port for Bazarr web UI
+    restart: unless-stopped # Restart unless explicitly stopped
+
+# Define networks if needed (currently empty, services communicate via default bridge network)
 networks: {}

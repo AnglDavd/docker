@@ -52,13 +52,15 @@ Follow these steps to get your RomM instance up and running:
     STEAMGRIDDB_API_KEY=
     HASHEOUS_API_ENABLED=true
 
+    ROMM_DATA_BASE=<YOUR_ROMM_DATA_BASE_PATH> # 📂 IMPORTANT: Set the base path for your ROMM data (library, assets).
+
     MARIADB_ROOT_PASSWORD=<YOUR_MARIADB_ROOT_PASSWORD>
     MARIADB_DATABASE=romm
     MARIADB_USER=romm-user
     MARIADB_PASSWORD=<YOUR_MARIADB_PASSWORD>
     ```
 
-    **❗ Important:** Replace `<YOUR_DB_PASSWORD>`, `<GENERATE_A_SECRET_KEY_WITH_openssl_rand_-hex_32>`, and `<YOUR_MARIADB_ROOT_PASSWORD>` with **strong, unique passwords** and a generated secret key.
+    **❗ Important:** Replace `<YOUR_DB_PASSWORD>`, `<GENERATE_A_SECRET_KEY_WITH_openssl_rand_-hex_32>`, `<YOUR_MARIADB_ROOT_PASSWORD>`, `<YOUR_MARIADB_PASSWORD>`, and `<YOUR_ROMM_DATA_BASE_PATH>` with **strong, unique passwords**, a generated secret key, and your actual desired base path for ROMM data.
 
 3.  **Configure RomM (config.yml):** ⚙️
 
@@ -96,11 +98,11 @@ Once the services are running, RomM should be accessible in your web browser at 
 
 ## 📂 Folder Structure
 
-RomM expects a specific folder structure for your game library. This setup is configured to use the recommended **Structure A**, where your ROMs are organized within a `roms` subfolder inside your main library path. For example:
+RomM expects a specific folder structure for your game library. This setup is configured to use the recommended **Structure A**, where your ROMs are organized within a `roms` subfolder inside your main library path. For example, if your `ROMM_DATA_BASE` is `/opt/romm_data`, your ROMs might be located at:
 
 ```
-/media/data/Docker/romm/library/roms/Nintendo 64/
-/media/data/Docker/romm/library/roms/PlayStation/
+/opt/romm_data/library/roms/Nintendo 64/
+/opt/romm_data/library/roms/PlayStation/
 ```
 
 For more details on RomM's folder structure, refer to the official documentation: [RomM Folder Structure](https://docs.romm.app/latest/Getting-Started/Folder-Structure/).

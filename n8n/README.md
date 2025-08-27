@@ -5,9 +5,9 @@ Welcome to the n8n Docker Compose setup! This configuration allows you to quickl
 ## ✨ Features
 
 *   **Easy Deployment:** 🐳 Get n8n up and running with a single command.
-*   **Persistent Data:** 💾 Your workflows and data are safely stored in Docker volumes.
-*   **Customizable:** ⚙️ Easily modify environment variables and settings to fit your needs.
-*   **Scalable:** 📈 Ready for expansion as your automation needs grow.
+*   **Persistent Data:** 💾 Your workflows and data are safely stored in Docker volumes and host-mounted directories.
+*   **Customizable:** ⚙️ Easily modify environment variables and settings to fit your needs, including database, Redis, and SMTP configurations.
+*   **Scalable:** 📈 Includes a worker service for improved performance and scalability of workflow execution.
 
 ## 📥 How to Get This Configuration
 
@@ -24,8 +24,8 @@ To get this specific n8n Docker Compose configuration, you can manually copy its
 
 Before you begin, ensure you have the following installed:
 
-*   [Docker](https://www.docker.com/get-started)
-*   [Docker Compose](https://docs.docker.com/compose/install/)
+*   [Docker](https://www.docker.com/get-started) 🐳
+*   [Docker Compose](https://docs.docker.com/compose/install/) 📦
 
 ## 🛠️ Installation & Setup
 
@@ -35,16 +35,23 @@ Before you begin, ensure you have the following installed:
     cd docker/n8n
     ```
 2.  **Configure your environment:**
-    Edit the `.env` file in this directory to set your desired n8n configurations (e.g., `N8N_BASIC_AUTH_USER`, `N8N_BASIC_AUTH_PASSWORD`).
+    Edit the `.env` file in this directory. **This is crucial!** You'll need to:
+    *   Set strong passwords for `POSTGRES_PASSWORD` and `DB_POSTGRESDB_PASSWORD`.
+    *   Adjust `GENERIC_TIMEZONE` to your local timezone.
+    *   Replace `N8N_HOST` and `WEBHOOK_URL` with your actual domain or IP address.
+    *   Define `N8N_DATA_BASE` to specify the host path for n8n's persistent data (uploads, custom files).
+    *   Optionally, uncomment and configure `N8N_BASIC_AUTH_USER` and `N8N_BASIC_AUTH_PASSWORD` for UI security.
+    *   Optionally, uncomment and configure SMTP settings for email notifications.
+
 3.  **Deploy n8n:**
     ```bash
-    docker-compose up -d
+    docker compose up -d
     ```
-    This command will download the necessary Docker images, create the containers, and start n8n in the background.
+    This command will download the necessary Docker images, create the containers, and start n8n and its dependencies (PostgreSQL, Redis) in the background.
 
 ## 🚀 Usage
 
-Once n8n is running, you can access its web interface at `http://localhost:5678` (or your configured port). Start building your amazing workflows!
+Once n8n is running, you can access its web interface at `http://localhost:5678` (or your configured `N8N_HOST` and port). Start building your amazing workflows! 💡
 
 ## 🔗 Useful Links
 

@@ -1,34 +1,33 @@
 version: '3.8'
 
 services:
+  # Main n8n instance: Handles the web UI and primary workflow execution.
   n8n:
-    image: n8nio/n8n:latest
-    restart: unless-stopped
+    image: n8nio/n8n:latest # Uses the latest official n8n Docker image.
+    restart: unless-stopped # Ensures the container restarts automatically unless explicitly stopped.
     ports:
-      - "5678:5678"
+      - "5678:5678" # Maps host port 5678 to container port 5678 for n8n's web interface.
     environment:
-      # Database configuration
+      # Database configuration, pulling values from the .env file.
       - DB_TYPE=${DB_TYPE}
       - DB_POSTGRESDB_HOST=${DB_POSTGRESDB_HOST}
       - DB_POSTGRESDB_DATABASE=${DB_POSTGRESDB_DATABASE}
       - DB_POSTGRESDB_USER=${DB_POSTGRESDB_USER}
       - DB_POSTGRESDB_PASSWORD=${DB_POSTGRESDB_PASSWORD}
-      # Other n8n settings
+      # General n8n settings, also pulled from .env.
       - GENERIC_TIMEZONE=${GENERIC_TIMEZONE}
       - N8N_HOST=${N8N_HOST}
       - N8N_PROTOCOL=${N8N_PROTOCOL}
       - WEBHOOK_URL=${WEBHOOK_URL}
-      - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=${N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS} # Enforce correct permissions for settings file
-      - N8N_RUNNERS_ENABLED=${N8N_RUNNERS_ENABLED} # Enable task runners
-      - N8N_RUNNERS_MODE=${N8N_RUNNERS_MODE_MAIN} # Set to 'queue' for the main n8n instance
-      - N8N_RUNNERS_BROKER_URL=${N8N_RUNNERS_BROKER_URL} # URL for the Redis broker
-      # Redis configuration for n8n
+      - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=${N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS} # Enforces correct permissions for settings file.
+      - N8N_RUNNERS_ENABLED=${N8N_RUNNERS_ENABLED} # Enables task runners for workflow execution.
+      - N8N_RUNNERS_MODE=${N8N_RUNNERS_MODE_MAIN} # Sets the main instance to use the queue system.
+      - N8N_RUNNERS_BROKER_URL=${N8N_RUNNERS_BROKER_URL} # Specifies the Redis broker URL for runners.
+      # Redis configuration for n8n's internal queue.
       - QUEUE_HEALTH_CHECK_ACTIVE=${QUEUE_HEALTH_CHECK_ACTIVE}
       - QUEUE_BULL_REDIS_HOST=${QUEUE_BULL_REDIS_HOST}
       - QUEUE_BULL_REDIS_PORT=${QUEUE_BULL_REDIS_PORT}
-      # Optional: Metrics configuration if needed
-      # - N8N_METRICS_REDIS_HOST=redis
-      # - N8N_METRICS_REDIS_PORT=6379
+      # Email SMTP configuration (uncomment and configure in .env to enable).
       - N8N_EMAIL_MODE=${N8N_EMAIL_MODE}
       - N8N_SMTP_HOST=${N8N_SMTP_HOST}
       - N8N_SMTP_PORT=${N8N_SMTP_PORT}
@@ -37,48 +36,55 @@ services:
       - N8N_SMTP_SENDER=${N8N_SMTP_SENDER}
       - N8N_SMTP_SSL=${N8N_SMTP_SSL}
     volumes:
-      - n8n_data:/home/node/.n8n
-      - /media/data/n8n/uploads:/home/node/.n8n/uploads
-      - /media/data/n8n/custom:/home/node/.n8n/custom
+      - n8n_data:/home/node/.n8n # Persistent volume for n8n's internal data and workflows.
+      - ${N8N_DATA_BASE}/uploads:/home/node/.n8n/uploads # Mounts host directory for user uploads.
+      - ${N8N_DATA_BASE}/custom:/home/node/.n8n/custom   # Mounts host directory for custom n8n files.
     depends_on:
-      - db
-      - redis
+      - db    # Ensures the database service starts before n8n.
+      - redis # Ensures the Redis service starts before n8n.
 
+  # PostgreSQL Database: Stores n8n's workflow data and credentials.
   db:
-    image: postgres:14
-    restart: unless-stopped
+    image: postgres:14 # Uses PostgreSQL version 14.
+    restart: unless-stopped # Ensures the container restarts automatically unless explicitly stopped.
     environment:
+      # Database credentials, pulled from the .env file.
       - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_USER=${POSTES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data # Persistent volume for PostgreSQL data.
 
+  # Redis Cache and Queue: Used by n8n for caching and managing workflow queues.
   redis:
-    image: redis:7.4
-    restart: unless-stopped
-    # Optional: Add a volume for Redis data persistence if needed
+    image: redis:7.4 # Uses Redis version 7.4.
+    restart: unless-stopped # Ensures the container restarts automatically unless explicitly stopped.
+    # Optional: Uncomment the volume below to enable Redis data persistence.
     # volumes:
     #   - redis_data:/data
 
+  # n8n Worker: Dedicated instance for executing workflows, offloading from the main n8n instance.
   n8n-worker:
-    image: n8nio/n8n:latest
-    restart: unless-stopped
+    image: n8nio/n8n:latest # Uses the same n8n Docker image as the main instance.
+    restart: unless-stopped # Ensures the container restarts automatically unless explicitly stopped.
     environment:
+      # Database configuration, pulled from the .env file.
       - DB_TYPE=${DB_TYPE}
       - DB_POSTGRESDB_HOST=${DB_POSTGRESDB_HOST}
       - DB_POSTGRESDB_DATABASE=${DB_POSTGRESDB_DATABASE}
       - DB_POSTGRESDB_USER=${DB_POSTGRESDB_USER}
       - DB_POSTGRESDB_PASSWORD=${DB_POSTGRESDB_PASSWORD}
+      # General n8n settings, also pulled from .env.
       - GENERIC_TIMEZONE=${GENERIC_TIMEZONE}
       - N8N_HOST=${N8N_HOST}
       - N8N_PROTOCOL=${N8N_PROTOCOL}
       - WEBHOOK_URL=${WEBHOOK_URL}
       - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=${N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS}
       - N8N_RUNNERS_ENABLED=${N8N_RUNNERS_ENABLED}
-      - N8N_RUNNERS_MODE=${N8N_RUNNERS_MODE_WORKER}
+      - N8N_RUNNERS_MODE=${N8N_RUNNERS_MODE_WORKER} # Sets this instance as a worker.
       - N8N_RUNNERS_BROKER_URL=${N8N_RUNNERS_BROKER_URL}
-      - N8N_RUNNERS_MAX_CONCURRENCY=${N8N_RUNNERS_MAX_CONCURRENCY}
+      - N8N_RUNNERS_MAX_CONCURRENCY=${N8N_RUNNERS_MAX_CONCURRENCY} # Max concurrent workflows for this worker.
+      # Email SMTP configuration (uncomment and configure in .env to enable).
       - N8N_EMAIL_MODE=${N8N_EMAIL_MODE}
       - N8N_SMTP_HOST=${N8N_SMTP_HOST}
       - N8N_SMTP_PORT=${N8N_SMTP_PORT}
@@ -87,12 +93,14 @@ services:
       - N8N_SMTP_SENDER=${N8N_SMTP_SENDER}
       - N8N_SMTP_SSL=${N8N_SMTP_SSL}
     volumes:
-      - /media/data/n8n/uploads:/home/node/.n8n/uploads
-      - /media/data/n8n/custom:/home/node/.n8n/custom
+      - ${N8N_DATA_BASE}/uploads:/home/node/.n8n/uploads # Mounts host directory for user uploads.
+      - ${N8N_DATA_BASE}/custom:/home/node/.n8n/custom   # Mounts host directory for custom n8n files.
     depends_on:
-      - db
-      - redis
+      - db    # Ensures the database service starts before the worker.
+      - redis # Ensures the Redis service starts before the worker.
 
+# Docker Volumes: Used for persistent data storage for services.
 volumes:
-  n8n_data:
-  postgres_data:
+  n8n_data:       # Volume for n8n's internal data.
+  postgres_data:  # Volume for PostgreSQL's database files.
+  # redis_data:   # Uncomment if you enable Redis data persistence in the redis service.

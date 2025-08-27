@@ -1,18 +1,43 @@
 #!/bin/bash
 
+# ------------------------------------------------------------------------------
+# ROMM Setup Script
+#
+# This script creates the necessary host directories for ROMM's Docker volumes.
+# It ensures that persistent storage locations for database data, ROMM resources,
+# game library, and assets are properly set up before starting the Docker Compose stack.
+#
+# Environment variables are loaded from the .env file.
+# ------------------------------------------------------------------------------
+
+# Load environment variables from the .env file
+# This is crucial for using ROMM_DATA_BASE and other variables defined there.
+if [ -f .env ]; then
+    export $(cat .env | grep -v '#' | awk '/=/ {print $1}')
+else
+    echo "Error: .env file not found. Please create one based on the README.md."
+    exit 1
+fi
+
 # Get the directory where the script is located
 SCRIPT_DIR="$(dirname "$0")"
 
 # Create directories for local bind mounts (relative to script location)
+# These are typically for database data, ROMM's internal resources, and Redis cache.
+echo "Creating local bind mount directories..."
 mkdir -p "${SCRIPT_DIR}/mysql_data"
 mkdir -p "${SCRIPT_DIR}/romm_resources"
 mkdir -p "${SCRIPT_DIR}/romm_redis_data"
 
 # Create directories for external bind mounts (absolute paths as defined in compose.yaml)
-mkdir -p "/media/data/Docker/romm/assets"
+# These paths are defined in the .env file via ROMM_DATA_BASE.
+echo "Creating external bind mount directories based on ROMM_DATA_BASE..."
+mkdir -p "${ROMM_DATA_BASE}/assets" # Directory for uploaded saves, states, etc.
 
 # Create platform-specific subfolders within the ROMs directory
-ROMS_DIR="/media/data/Docker/romm/library/roms"
+# This structure is recommended by ROMM for organizing your game library.
+ROMS_DIR="${ROMM_DATA_BASE}/library/roms"
+echo "Creating platform-specific ROMs subfolders under ${ROMS_DIR}..."
 mkdir -p "${ROMS_DIR}/3do"
 mkdir -p "${ROMS_DIR}/amiga"
 mkdir -p "${ROMS_DIR}/arcade"
@@ -48,3 +73,4 @@ mkdir -p "${ROMS_DIR}/virtualboy"
 mkdir -p "${ROMS_DIR}/wonderswan"
 mkdir -p "${ROMS_DIR}/wonderswan-color"
 
+echo "All necessary directories created successfully!"
