@@ -34,10 +34,10 @@ Before launching, you need to tell Docker Compose where to store your data and w
 
     *   `PUID` (Process User ID) & `PGID` (Process Group ID): These define the user and group permissions for the applications inside the containers. To find your current `PUID` and `PGID`, simply open your terminal and type `id -u` and `id -g` respectively. For example, if your username is `ainu`, you might see `1000` for both.
     *   `TZ` (Timezone): Set this to your local timezone (e.g., `America/Santiago`, `Europe/London`). This ensures all your media events are timestamped correctly! 🌍
-    *   `ARRSTACK_DOWNLOADS_BASE`: This is the **absolute path** on your host machine where all your downloaded media (movies, TV shows, music) will reside. Think of it as your central media hub! 📂
+    *   `ARRSTACK_DOWNLOADS_BASE`: This is the **absolute path** on your host machine where all your downloaded media (movies, TV shows, music) will reside. This will be the root directory for your media library. 📂
     *   `ARRSTACK_CONFIG_BASE`: This is the **absolute path** on your host machine where each application will store its configuration files. Keeping these separate makes backups and migrations a breeze! 💾
 
-    **🚨 Important:** Do NOT forget to replace `/path/to/your/downloads/base` and `/path/to/your/config/base` with the actual, full paths on your system! For example, `/home/youruser/media/downloads` and `/home/youruser/docker_configs`.
+    **🚨 Important:** You MUST replace `/path/to/your/downloads/base` and `/path/to/your/config/base` with the actual, absolute paths you wish to use on your system. These paths are crucial for the services to store their data correctly.
 
 ### Step 2: Launch the Stack! 🚀
 
