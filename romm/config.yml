@@ -1,3 +1,14 @@
 system:
   filesystem:
     roms_folder: roms
+metadata:
+  sources:
+    - name: screenscraper
+      enabled: true
+      priority: 1
+    - name: steamgriddb
+      enabled: true
+      priority: 2
+    - name: igdb
+      enabled: true
+      priority: 3
