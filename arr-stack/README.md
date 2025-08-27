@@ -2,7 +2,7 @@
 
 Welcome to your one-stop solution for managing your media library with ease! This directory provides a robust and flexible Docker Compose setup for the essential ARR stack applications. Get ready to automate your media collection like a pro! ✨
 
-## 📦 What's Inside?
+## ✨ Features
 
 This stack includes:
 
@@ -13,7 +13,24 @@ This stack includes:
 *   **Prowlarr:** 🔍 Your indexer manager. Integrates all your indexers with your ARR apps for seamless searching.
 *   **Bazarr:** 🗣️ Automatically downloads and pairs subtitles with your movies and TV shows. Never miss a word!
 
-## 🛠️ Setup Guide: Get Started in a Flash!
+## 📥 How to Get This Configuration
+
+To get this specific ARR Stack Docker Compose configuration, you can manually copy its content:
+
+1.  Navigate to the `arr-stack` directory on GitHub: [https://github.com/AnglDavd/docker/tree/main/arr-stack](https://github.com/AnglDavd/docker/tree/main/arr-stack)
+2.  For each file within this directory (`.env`, `compose.yaml`, `README.md`), click on the file name, then click the "Raw" button to view its content.
+3.  Copy the raw content and paste it into a new file with the same name on your local machine.
+
+---
+
+## 📋 Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+*   [Docker](https://www.docker.com/get-started) 🐳
+*   [Docker Compose](https://docs.docker.com/compose/install/) 📦
+
+## 🛠️ Installation & Setup
 
 Follow these simple steps to get your ARR stack up and running:
 
@@ -90,4 +107,9 @@ To ensure you're always running the latest and greatest versions of your ARR sta
     ```
     This will download any updated images and restart your services, applying the new versions while preserving your data! ✨
 
-Enjoy your automated media management journey! 🎉
+## 🔗 Useful Links
+
+*   **LinuxServer.io:** [https://www.linuxserver.io/](https://www.linuxserver.io/) 🐧 (Source for most Docker images in this stack)
+
+---
+_Enjoy your automated media management journey!_ 🎉

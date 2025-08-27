@@ -53,6 +53,20 @@ Before you begin, ensure you have the following installed:
 
 Once n8n is running, you can access its web interface at `http://localhost:5678` (or your configured `N8N_HOST` and port). Start building your amazing workflows! 💡
 
+## 🔄 Updating Your Applications: Stay Fresh!
+
+To ensure you're always running the latest and greatest versions of n8n and its dependencies, follow these steps:
+
+1.  Pull the newest Docker images:
+    ```bash
+    docker compose pull
+    ```
+2.  Recreate and start the containers with the new images:
+    ```bash
+    docker compose up -d
+    ```
+    This will download any updated images and restart your services, applying the new versions while preserving your data! ✨
+
 ## 🔗 Useful Links
 
 *   **n8n Official Website:** [https://n8n.io/](https://n8n.io/) 🌐

@@ -2,9 +2,13 @@
 
 This repository contains the necessary files to set up and run RomM (Retro Game Manager) using Docker Compose.
 
-## ✨ Description
+## ✨ Features
 
-RomM is a web-based application for managing your retro game collection. This setup uses Docker Compose to orchestrate the RomM application, a MariaDB database, and a Redis instance for caching.
+*   **Centralized Management:** 🕹️ Organize and manage your entire retro game collection from a single web interface.
+*   **Rich Metadata:** 📚 Automatically fetch game details, cover art, screenshots, and more from various online sources.
+*   **Persistent Data:** 💾 Your game library data, metadata, and configurations are safely stored in Docker volumes.
+*   **Customizable:** ⚙️ Easily configure database settings, API keys for metadata providers, and ROM folder structures via environment variables and a dedicated config file.
+*   **Optimized Performance:** ⚡ Includes Docker Compose configurations with resource limits and database optimizations for smooth operation.
 
 ## 📥 How to Get This Configuration
 
@@ -24,7 +28,7 @@ Before you begin, ensure you have the following installed on your system:
 *   **Docker:** [Install Docker Engine](https://docs.docker.com/engine/install/) 🐳
 *   **Docker Compose:** [Install Docker Compose](https://docs.docker.com/compose/install/) 📦
 
-## 🚀 Setup Instructions
+## 🛠️ Installation & Setup
 
 Follow these steps to get your RomM instance up and running:
 
@@ -87,7 +91,7 @@ Follow these steps to get your RomM instance up and running:
     After you have configured your `.env` file with the required passwords and API keys, you can start the RomM services using Docker Compose:
 
     ```bash
-    docker compose up -d
+docker compose up -d
     ```
 
     The `-d` flag will run the services in detached mode (in the background).
@@ -95,6 +99,20 @@ Follow these steps to get your RomM instance up and running:
 ## 🌐 Usage
 
 Once the services are running, RomM should be accessible in your web browser at `http://localhost:80`. 🚀
+
+## 🔄 Updating Your Applications: Stay Fresh!
+
+To ensure you're always running the latest and greatest versions of RomM and its dependencies, follow these steps:
+
+1.  Pull the newest Docker images:
+    ```bash
+    docker compose pull
+    ```
+2.  Recreate and start the containers with the new images:
+    ```bash
+    docker compose up -d
+    ```
+    This will download any updated images and restart your services, applying the new versions while preserving your data! ✨
 
 ## 📂 Folder Structure
 
