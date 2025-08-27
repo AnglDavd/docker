@@ -43,7 +43,7 @@ services:
       - MARIADB_PASSWORD=${MARIADB_PASSWORD}
     volumes:
       - ./mysql_data:/var/lib/mysql
-    command: --innodb-buffer-pool-size=768M
+    command: --innodb-buffer-pool-size=768M --bind-address=0.0.0.0
     healthcheck:
       test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
       start_period: 30s
