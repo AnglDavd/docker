@@ -50,7 +50,7 @@ services:
     environment:
       # Database credentials, pulled from the .env file.
       - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_USER=${POSTES_USER}
+      - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     volumes:
       - postgres_data:/var/lib/postgresql/data # Persistent volume for PostgreSQL data.
