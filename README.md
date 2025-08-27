@@ -7,8 +7,9 @@ This repository contains a collection of Docker Compose configurations for vario
 - [n8n](./n8n/README.md): An open-source workflow automation platform.
   - 🌐 Official Website: [https://n8n.io/](https://n8n.io/)
   - 🐙 GitHub Repository: [https://github.com/n8n-io/n8n](https://github.com/n8n-io/n8n)
-- [romm](./romm/README.md): A brief description of romm.
-  - 🐙 GitHub Repository: [https://github.com/rommapp/romm](https://github.com/rommapp/romm)
+- [romm](./romm/README.md): A brief description of romm. 🤖
+  - 🐙 GitHub Repository: [https://github.com/rommapp/romm](https://github.com/rommapp/romm) 🔗
+- [arr-stack](./arr-stack/README.md): Your ultimate media automation suite with Sonarr, Radarr, Lidarr, and more! 🎬🎶📚
 
 ## 🛠️ How to Use
 

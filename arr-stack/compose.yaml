@@ -1,0 +1,81 @@
+services:
+  sonarr:
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    image: linuxserver/sonarr:latest
+    ports:
+      - 8989:8989/tcp
+    restart: always
+    volumes:
+      - ${ARRSTACK_DOWNLOADS_BASE}/Downloads:/downloads
+      - ${ARRSTACK_DOWNLOADS_BASE}/TV-Shows:/tvshows
+      - ${ARRSTACK_CONFIG_BASE}/sonarr:/config
+  radarr:
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    image: linuxserver/radarr:latest
+    ports:
+      - 7878:7878/tcp
+    restart: always
+    volumes:
+      - ${ARRSTACK_CONFIG_BASE}/radarr:/config
+      - ${ARRSTACK_DOWNLOADS_BASE}/Downloads:/downloads
+      - ${ARRSTACK_DOWNLOADS_BASE}/Movies:/movies
+  lidarr:
+    image: linuxserver/lidarr:latest
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${ARRSTACK_CONFIG_BASE}/lidarr:/config
+      - ${ARRSTACK_DOWNLOADS_BASE}/Music:/music
+      - ${ARRSTACK_DOWNLOADS_BASE}/Downloads:/downloads
+    ports:
+      - 8686:8686
+    restart: always
+  deluge:
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    image: linuxserver/deluge:latest
+    ports:
+      - 6881:6881/tcp
+      - 6881:6881/udp
+      - 8112:8112/tcp
+    restart: always
+    volumes:
+      - ${ARRSTACK_DOWNLOADS_BASE}/Downloads:/downloads
+      - ${ARRSTACK_CONFIG_BASE}/deluge:/config
+  prowlarr:
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    image: lscr.io/linuxserver/prowlarr:latest
+    ports:
+      - 9696:9696/tcp
+    restart: always
+    volumes:
+      - ${ARRSTACK_DOWNLOADS_BASE}/:/media
+      - ${ARRSTACK_CONFIG_BASE}/prowlarr:/config
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${ARRSTACK_CONFIG_BASE}/bazarr:/config
+      - ${ARRSTACK_DOWNLOADS_BASE}/Movies:/movies
+      - ${ARRSTACK_DOWNLOADS_BASE}/TV-Shows:/tvshows
+    ports:
+      - 6767:6767
+    restart: unless-stopped
+networks: {}
