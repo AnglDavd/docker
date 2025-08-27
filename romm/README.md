@@ -88,7 +88,7 @@ Follow these steps to get your RomM instance up and running:
 
 5.  **Starting RomM:** ▶️
 
-    After you have configured your `.env` file with the required passwords and API keys, you can start the RomM services using Docker Compose:
+    Once your `.env` file is configured, you can launch the RomM services using Docker Compose:
 
     ```bash
 docker compose up -d
