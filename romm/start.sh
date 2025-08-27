@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Get the directory where the script is located
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+SCRIPT_DIR="$(dirname "$0")"
 
 # Create directories for local bind mounts (relative to script location)
 mkdir -p "${SCRIPT_DIR}/mysql_data"
