@@ -6,6 +6,32 @@ This repository contains the necessary files to set up and run RomM (Retro Game 
 
 RomM is a web-based application for managing your retro game collection. This setup uses Docker Compose to orchestrate the RomM application, a MariaDB database, and a Redis instance for caching.
 
+## 📥 How to Get This Configuration
+
+You can get this specific RomM Docker Compose configuration without cloning the entire repository. Choose the method that suits you best:
+
+### Method 1: Using `git archive` (Recommended)
+
+If you have Git installed, you can download a clean `.zip` archive of just this `romm` configuration:
+
+```bash
+git archive --format=zip --output=romm-config.zip main:romm
+unzip romm-config.zip
+cd romm
+```
+
+### Method 2: Manual Download
+
+You can also manually download the files:
+
+1.  Navigate to the `romm` directory on GitHub: [https://github.com/AnglDavd/docker/tree/main/romm](https://github.com/AnglDavd/docker/tree/main/romm)
+2.  Click on each file (`.env`, `compose.yaml`, `config.yml`, `README.md`, `start.sh`) and then click the "Raw" button to view its content.
+3.  Copy the raw content and paste it into a new file with the same name on your local machine.
+4.  Alternatively, you can download the entire `romm` directory as a `.zip` from the GitHub web interface by navigating to the `romm` directory and looking for a "Download" button (this might download the whole repo if not specifically for a subdirectory).
+
+---
+
+
 ## 📋 Prerequisites
 
 Before you begin, ensure you have the following installed on your system:
