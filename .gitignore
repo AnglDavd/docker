@@ -12,6 +12,5 @@
 # and should not be committed to version control.
 .env
 
-# Ignore the GEMINI.md file.
-# This file might contain internal notes or configurations specific to the Gemini CLI.
-GEMINI.md
+# GEMINI.md is now tracked as per user request.
+# It contains guidelines for the Gemini CLI agent.
