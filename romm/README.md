@@ -73,7 +73,19 @@ Follow these steps to get your RomM instance up and running:
     ```yaml
     system:
       filesystem:
-        roms_folder: roms
+        roms_folder: roms # Subfolder within your mounted library for ROMs
+
+    metadata:
+      sources:
+        - name: screenscraper # Primary metadata source
+          enabled: true
+          priority: 1
+        - name: steamgriddb # Artwork source
+          enabled: true
+          priority: 2
+        - name: igdb # Alternative metadata source
+          enabled: true
+          priority: 3
     ```
 
     You can customize this file further based on the [RomM Configuration File documentation](https://docs.romm.app/latest/Getting-Started/Configuration-File/).
