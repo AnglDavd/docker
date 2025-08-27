@@ -18,14 +18,20 @@ Each subdirectory contains its own Docker Compose configuration and a `README.md
 
 This repository contains multiple Docker Compose configurations. You can download a specific configuration without cloning the entire repository.
 
-### Method 1: Using `git archive` (Recommended)
+### Method 1: Using `curl` and `unzip` (Recommended)
 
-If you have Git installed, you can download a clean `.zip` archive of a specific subdirectory. Replace `<subdirectory_name>` with `n8n` or `romm`.
+This method allows you to download a specific configuration directly from GitHub without cloning the entire repository. Replace `<subdirectory_name>` with `n8n` or `romm`.
 
 ```bash
-git archive --format=zip --output=<subdirectory_name>-config.zip main:<subdirectory_name>
-unzip <subdirectory_name>-config.zip
-cd <subdirectory_name>
+# 1. Download the entire repository as a .zip file
+curl -LO https://github.com/AnglDavd/docker/archive/refs/heads/main.zip
+
+# 2. Extract only the desired subdirectory from the downloaded .zip
+unzip main.zip "docker-main/<subdirectory_name>/*" -d .
+
+# 3. Move the content to your current directory and clean up
+mv docker-main/<subdirectory_name>/* .
+rm -rf docker-main main.zip
 ```
 
 ### Method 2: Manual Download
