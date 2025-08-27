@@ -103,7 +103,7 @@ Follow these steps to get your RomM instance up and running:
     Once your `.env` file is configured, you can launch the RomM services using Docker Compose:
 
     ```bash
-docker compose up -d
+      docker compose up -d
     ```
 
     The `-d` flag will run the services in detached mode (in the background).
