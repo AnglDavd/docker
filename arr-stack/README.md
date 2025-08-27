@@ -63,8 +63,9 @@ Once your `.env` file is ready, it's time for liftoff!
 1.  Open your terminal.
 2.  Navigate to this `arr-stack/` directory:
     ```bash
-    cd /home/ainu/Proyectos/Docker/arr-stack
+    cd path/to/your/arr-stack/directory
     ```
+    (Replace `path/to/your/arr-stack/directory` with the actual path where your `compose.yaml` and `.env` files are located).
 3.  Execute the magic command to bring your services to life in the background:
     ```bash
     docker compose up -d
