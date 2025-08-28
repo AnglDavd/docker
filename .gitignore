@@ -7,11 +7,6 @@
 # from being committed.
 # ------------------------------------------------------------------------------
 
-# Ignore all .env files across the project.
-# These files contain sensitive information (e.g., passwords, API keys)
-# and should not be committed to version control.
-.env
-
 # Ignore the GEMINI.md file.
 # This file might contain internal notes or configurations specific to the Gemini CLI.
 GEMINI.md
