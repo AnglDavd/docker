@@ -18,6 +18,11 @@ Dive into each directory to discover powerful applications, each with its own de
 *   **[arr-stack](./arr-stack/README.md): The Media Automation Suite!** 🎬🎶📚
     Your ultimate solution for automating your media library. This stack includes Sonarr (TV shows), Radarr (movies), Lidarr (music), Deluge (downloader), Prowlarr (indexer manager), and Bazarr (subtitles) for a seamless media experience.
 
+*   **[evolution-api](./evolution-api/README.md): WhatsApp API for your business!** 📱
+    A REST API for WhatsApp, allowing you to send and receive messages, manage groups, and more.
+    - 🌐 Official Website: [https://doc.evolution-api.com/](https://doc.evolution-api.com/)
+    - 🐙 GitHub Repository: [https://github.com/evolution-api/evolution-api](https://github.com/evolution-api/evolution-api)
+
 ## 🛠️ How to Use These Configurations
 
 Each subdirectory within this repository contains a complete Docker Compose setup for a specific service. To get started with any of them, simply navigate to the respective directory and follow the instructions in its `README.md` file.
