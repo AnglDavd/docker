@@ -35,6 +35,7 @@ Before you begin, ensure you have the following installed:
 2.  **Configure your environment:**
     Edit the `.env` file in this directory. **This is crucial!** You'll need to:
     *   Set your `AUTHENTICATION_API_KEY`.
+    *   Change the default `POSTGRES_PASSWORD` to a strong password.
 
 3.  **Deploy Evolution API:**
     ```bash
