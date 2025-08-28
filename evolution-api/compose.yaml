@@ -3,6 +3,7 @@ services:
   evolution-api:
     container_name: evolution_api
     image: atendai/evolution-api:v2.1.1
+    command: sh -c 'until pg_isready -h db -p 5432 -U ${POSTGRES_USER} -d ${POSTGRES_DB}; do echo >&2 "Postgres is unavailable - sleeping"; sleep 1; done; echo >&2 "Postgres is up - executing command"; npm run db:deploy && npm run start:prod'
     restart: always
     ports:
       - "8080:8080"
@@ -15,6 +16,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      redis:
+        condition: service_started
   db:
     image: postgres:14
     restart: unless-stopped
@@ -29,6 +32,12 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+  redis:
+    image: redis:latest
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
 volumes:
   evolution_instances:
   postgres_data:
+  redis_data:
