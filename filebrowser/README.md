@@ -41,16 +41,7 @@ Before you begin, ensure you have the following installed:
     *   Modify the volume mappings to point to your desired directories.
 
 3.  **Create the configuration file:**
-    Create a `data` directory and inside it, a file named `config.yml` with the following content:
-    ```yaml
-    server:
-      sources:
-        - path: /folder # corresponds to the folder mounted above in docker-compose
-          config:
-            defaultEnabled: true # add source for all users by default 
-    auth:
-      adminUsername: "CHANGE_ME"
-    ```
+    Create a `data` directory and inside it, create a `config.yml` file. You can use the provided `config.yml` in this directory as a template.
 
 4.  **Deploy File Browser:**
     ```bash
