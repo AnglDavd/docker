@@ -1,0 +1,15 @@
+services:
+  beszel-agent:
+    image: henrygd/beszel-agent
+    container_name: beszel-agent
+    restart: always
+    network_mode: host
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      # Change the path below to the location of your .beszel directory
+      - /path/to/your/.beszel:/extra-filesystems/sda1:ro
+    environment:
+      PORT: 45876
+      # Replace the key below with your own SSH public key
+      KEY: "your-ssh-public-key"
+networks: {}
