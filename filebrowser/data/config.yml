@@ -1,0 +1,7 @@
+server:
+  sources:
+    - path: /folder # corresponds to the folder mounted above in docker-compose
+      config:
+        defaultEnabled: true # add source for all users by default 
+auth:
+  adminUsername: "CHANGE_ME"
