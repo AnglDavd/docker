@@ -1,0 +1,14 @@
+services:
+  nexterm:
+    image: germannewsmaker/nexterm:latest
+    container_name: nexterm
+    ports:
+      - 2005:6989
+    volumes:
+      # Change the path below to the location of your data
+      - /path/to/your/data:/app/data
+    environment:
+      # Replace the key below with your own encryption key
+      - ENCRYPTION_KEY="your-encryption-key"
+    restart: always
+networks: {}

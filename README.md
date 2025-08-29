@@ -35,6 +35,10 @@ Dive into each directory to discover powerful applications, each with its own de
     A client that connects to your Beszel chat server.
     - 🐙 GitHub Repository: [https://github.com/henrygd/beszel](https://github.com/henrygd/beszel)
 
+*   **[nexterm](./nexterm/README.md): Web-based terminal emulator!** 💻
+    A web-based terminal emulator.
+    - 🐙 GitHub Repository: [https://github.com/germannewsmaker/nexterm](https://github.com/germannewsmaker/nexterm)
+
 ## 🛠️ How to Use These Configurations
 
 Each subdirectory within this repository contains a complete Docker Compose setup for a specific service. To get started with any of them, simply navigate to the respective directory and follow the instructions in its `README.md` file.
