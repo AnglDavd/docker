@@ -66,7 +66,7 @@ To ensure you're always running the latest and greatest version of File Browser,
 
 ## 🔗 Useful Links
 
-*   **File Browser Official Website:** [https://filebrowser.org/](https://filebrowser.org/) 🌐
+
 *   **File Browser GitHub Repository:** [https://github.com/gtsteffaniak/filebrowser](https://github.com/gtsteffaniak/filebrowser) 🐙
 
 ---
