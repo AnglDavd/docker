@@ -23,6 +23,18 @@ Dive into each directory to discover powerful applications, each with its own de
     - 🌐 Official Website: [https://doc.evolution-api.com/](https://doc.evolution-api.com/)
     - 🐙 GitHub Repository: [https://github.com/evolution-api/evolution-api](https://github.com/evolution-api/evolution-api)
 
+*   **[filebrowser](./filebrowser/README.md): Web File Manager!** 📂
+    A web-based file manager that lets you upload, download, edit, and manage your files and folders.
+    - 🐙 GitHub Repository: [https://github.com/gtsteffaniak/filebrowser](https://github.com/gtsteffaniak/filebrowser)
+
+*   **[beszel](./beszel/README.md): Simple, self-hosted, real-time chat!** 💬
+    A simple, self-hosted, real-time chat application.
+    - 🐙 GitHub Repository: [https://github.com/henrygd/beszel](https://github.com/henrygd/beszel)
+
+*   **[beszel-client](./beszel-client/README.md): Beszel Chat Client!** 💻
+    A client that connects to your Beszel chat server.
+    - 🐙 GitHub Repository: [https://github.com/henrygd/beszel](https://github.com/henrygd/beszel)
+
 ## 🛠️ How to Use These Configurations
 
 Each subdirectory within this repository contains a complete Docker Compose setup for a specific service. To get started with any of them, simply navigate to the respective directory and follow the instructions in its `README.md` file.
