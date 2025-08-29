@@ -2,7 +2,7 @@ services:
   filebrowser:
     environment:
       FILEBROWSER_CONFIG: data/config.yaml
-      FILEBROWSER_ADMIN_PASSWORD: admingmainu
+      FILEBROWSER_ADMIN_PASSWORD: "CHANGE_ME"
       TZ: America/Santiago
     volumes:
       - /media/data/:/folder
