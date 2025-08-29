@@ -39,6 +39,9 @@ Dive into each directory to discover powerful applications, each with its own de
     A web-based terminal emulator.
     - 🐙 GitHub Repository: [https://github.com/germannewsmaker/nexterm](https://github.com/germannewsmaker/nexterm)
 
+*   **[wordpress](./wordpress/README.md): Complete WordPress Stack!** 🌐
+    A complete WordPress environment including MySQL, phpMyAdmin, and automated backups.
+
 ## 🛠️ How to Use These Configurations
 
 Each subdirectory within this repository contains a complete Docker Compose setup for a specific service. To get started with any of them, simply navigate to the respective directory and follow the instructions in its `README.md` file.
