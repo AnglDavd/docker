@@ -1,0 +1,15 @@
+services:
+  filebrowser:
+    environment:
+      FILEBROWSER_CONFIG: data/config.yaml
+      FILEBROWSER_ADMIN_PASSWORD: admingmainu
+      TZ: America/Santiago
+    volumes:
+      - /media/data/:/folder
+      - ./data:/home/filebrowser/data
+      - ./tmp/:/home/filebrowser/tmp/
+    ports:
+      - 1004:80
+    image: gtstef/filebrowser
+    restart: always
+networks: {}
